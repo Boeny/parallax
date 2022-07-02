@@ -1,11 +1,11 @@
 import React, { memo, useEffect, useState } from 'react';
-import './Scene.css';
+import './index.css';
 
-import { store } from './store';
+import { store } from '../store';
 
-import { Background } from './Background/Background';
-import { Player } from './Player/Player';
-import { Ground } from './Ground/Ground';
+import { Background } from './components/Background';
+import { Player } from './components/Player';
+import { Ground } from './components/Ground';
 
 
 export const Scene = memo(() => {

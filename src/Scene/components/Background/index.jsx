@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
-import './Background.css';
+import './index.css';
 
-import { store } from '../store';
+import { store } from '../../../store';
 
 
 const BackgroundComponent = memo(({layers, layersOffset, screenStep, height}) => {

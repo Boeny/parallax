@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
-import './Ground.css';
+import './index.css';
 
-import { store } from '../store';
+import { store } from '../../../store';
 
 
 const GroundComponent = memo(({groundLayer, layersOffset, screenStep, height}) => {

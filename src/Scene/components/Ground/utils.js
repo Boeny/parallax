@@ -1,4 +1,4 @@
-import { setInitialLayerOffset } from "../utils";
+import { setInitialLayerOffset } from "../../../utils";
 
 import { ReactComponent as Layer14 } from './images/layer14.svg';
 

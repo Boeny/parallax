@@ -2,13 +2,13 @@ import React, { useCallback, useEffect, useState } from 'react';
 import './App.css';
 
 import { KEY_CODES, OFFSET_STEP, TIME_TO_THE_END_OF_THE_MAP } from './constants';
-import { BACKGROUND_VIEWPORT } from './Background/constants';
+import { BACKGROUND_VIEWPORT } from './Scene/components/Background/constants';
 
 import { isResumeMenuItemVisible, onNewGameAction, store } from './store';
 
 import { getScreenStep } from './utils';
-import { getLayers } from './Background/utils';
-import { getGroundLayer } from './Ground/utils';
+import { getLayers } from './Scene/components/Background/utils';
+import { getGroundLayer } from './Scene/components/Ground/utils';
 
 import { Menu } from './Menu';
 import { Scene } from './Scene';

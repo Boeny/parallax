@@ -1,5 +1,5 @@
 import { memo } from "react";
-import "./Player.css";
+import "./index.css";
 
 
 export const Player = memo(() => {
