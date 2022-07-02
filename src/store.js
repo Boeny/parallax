@@ -3,6 +3,7 @@ export const store = {
     height: 0,
     screenStep: 0,
     layers: [],
+    groundLayer: null,
     menu: {
         items: [
             {id: 'resume', name: 'Resume', isVisible: false},

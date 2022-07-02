@@ -1,4 +1,5 @@
-import { TIME_TO_THE_END_OF_THE_MAP } from "../constants";
+import { setInitialLayerOffset } from "../utils";
+
 import { ReactComponent as Layer1 } from './images/layer1.svg';
 import { ReactComponent as Layer2 } from './images/layer2.svg';
 import { ReactComponent as Layer3 } from './images/layer3.svg';
@@ -12,7 +13,7 @@ import { ReactComponent as Layer10 } from './images/layer10.svg';
 import { ReactComponent as Layer11 } from './images/layer11.svg';
 import { ReactComponent as Layer12 } from './images/layer12.svg';
 import { ReactComponent as Layer13 } from './images/layer13.svg';
-import { ReactComponent as Layer14 } from './images/layer14.svg';
+
 
 export const getLayers = (width) => {
     const layers = [
@@ -29,14 +30,9 @@ export const getLayers = (width) => {
         {component: Layer11, color: 'rgb(86 205 205)', width: width + width},
         {component: Layer12, color: 'rgb(105 216 216)', width: width + 1.3 * width},
         {component: Layer13, color: 'rgb(118 225 225)', width: width + 1.5 * width},
-        {component: Layer14, color: 'rgb(193 255 255)', width: width + 2 * width},
     ];
 
-    layers.forEach((layer) => {
-        layer.offset = (layer.width - width) / TIME_TO_THE_END_OF_THE_MAP;
-    });
+    layers.forEach((layer) => setInitialLayerOffset(layer, width));
 
     return layers;
 };
-
-export const getScreenStep = (width) => (width - window.innerWidth) / TIME_TO_THE_END_OF_THE_MAP;

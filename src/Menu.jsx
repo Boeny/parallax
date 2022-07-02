@@ -1,6 +1,8 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
 import './Menu.css';
+
 import { store } from './store';
+
 
 const MenuItem = memo(({name, onClick}) => {
     return (

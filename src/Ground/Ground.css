@@ -1,10 +1,10 @@
-.background {
+.ground {
     position: fixed;
-    z-index: 0;
+    z-index: 1;
     top: 0;
     left: 0;
 }
-.background > * {
+.ground > * {
     position: absolute;
     top: 0;
     left: 0;

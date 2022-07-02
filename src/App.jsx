@@ -1,11 +1,18 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import './App.css';
-import { BACKGROUND_VIEWPORT } from './Background/constants';
-import { getLayers, getScreenStep } from './Background/utils';
+
 import { KEY_CODES, OFFSET_STEP, TIME_TO_THE_END_OF_THE_MAP } from './constants';
+import { BACKGROUND_VIEWPORT } from './Background/constants';
+
+import { isResumeMenuItemVisible, onNewGameAction, store } from './store';
+
+import { getScreenStep } from './utils';
+import { getLayers } from './Background/utils';
+import { getGroundLayer } from './Ground/utils';
+
 import { Menu } from './Menu';
 import { Scene } from './Scene';
-import { isResumeMenuItemVisible, onNewGameAction, store } from './store';
+
 
 export function App() {
     const [isSceneVisible, setSceneVisibility] = useState(false);
@@ -19,6 +26,7 @@ export function App() {
         store.width = BACKGROUND_VIEWPORT.WIDTH * ratio / 2;
         store.screenStep = getScreenStep(store.width);
         store.layers = getLayers(store.width);
+        store.groundLayer = getGroundLayer(store.width);
     }, []);
 
     const moveRight = useCallback(() => {
@@ -30,7 +38,7 @@ export function App() {
         store.setLayersOffset(offset => offset < 0 ? offset + OFFSET_STEP : offset);
         update(!refresh);
     }, [refresh]);
-    
+
     useEffect(() => {
         if (isMovingRight && isMovingLeft) {
             return;
@@ -71,7 +79,7 @@ export function App() {
                 break;
             default: break;
         }
-    }, []);
+    }, [handleGameResume]);
 
     const handleLayoutKeyUp = useCallback((e) => {
         switch (e.keyCode) {

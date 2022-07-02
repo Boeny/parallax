@@ -1,6 +1,8 @@
-import React, { memo, useEffect, useState } from 'react';
-import { store } from '../store';
+import React, { memo } from 'react';
 import './Background.css';
+
+import { store } from '../store';
+
 
 const BackgroundComponent = memo(({layers, layersOffset, screenStep, height}) => {
     return (
@@ -22,16 +24,7 @@ const BackgroundComponent = memo(({layers, layersOffset, screenStep, height}) =>
     );
 });
 
-export const Background = memo(() => {
-    const [layersOffset, setLayersOffset] = useState(0);
-
-    useEffect(() => {
-        store.setLayersOffset = (value) => {
-            store.layersOffset = layersOffset;
-            setLayersOffset(value);
-        };
-    }, [layersOffset]);
-
+export const Background = memo(({layersOffset}) => {
     return (
         <BackgroundComponent
             layers={store.layers}
