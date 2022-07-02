@@ -1,27 +1,45 @@
-import React, { useCallback, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import './Menu.css';
+import { store } from './store';
 
-const defaultMenu = [
-    {id: 'resume', name: 'Resume', isVisible: false},
-    {id: 'new', name: 'New', isVisible: true},
-];
-
-function MenuItem({name, onClick}) {
+const MenuItem = memo(({name, onClick}) => {
     return (
         <div className='menuItem' onClick={onClick}>
             {name}
         </div>
     );
-}
+});
 
-export function Menu({onNewGame, onGameResume}) {
-    const [menu, setMenu] = useState(defaultMenu);
+const MenuComponent = memo(({items, onClick}) => {
+    return (
+        <div className='menu'>
+            {
+                items.map((item) =>
+                    item.isVisible &&
+                    <MenuItem
+                        key={item.id}
+                        name={item.name}
+                        onClick={() => onClick(item.id)}
+                    />
+                )
+            }
+        </div>
+    );
+});
+
+export const Menu = memo(({onNewGame, onGameResume}) => {
+    const [isVisible, setVisibility] = useState(true);
+
+    useEffect(() => {
+        store.setMenuVisibility = (value) => {
+            store.menu.isVisible = value;
+            setVisibility(value);
+        };
+    }, []);
 
     const handleClick = useCallback((id) => {
         switch (id) {
             case 'new':
-                menu.find((item) => item.id === 'resume').isVisible = true;
-                //setMenu(menu);
                 onNewGame();
                 break;
             case 'resume':
@@ -29,20 +47,15 @@ export function Menu({onNewGame, onGameResume}) {
                 break;
             default: throw Error();
         }
-    }, [menu, onGameResume, onNewGame]);
+    }, []);
 
+    if (!isVisible) {
+        return null;
+    }
     return (
-        <div className='menu'>
-            {
-                menu.map((item) =>
-                    item.isVisible &&
-                    <MenuItem
-                        key={item.id}
-                        name={item.name}
-                        onClick={() => handleClick(item.id)}
-                    />
-                )
-            }
-        </div>
+        <MenuComponent
+            items={store.menu.items}
+            onClick={handleClick}
+        />
     );
-}
+});
