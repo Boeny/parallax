@@ -11,6 +11,7 @@ export function App() {
     const [isSceneVisible, setSceneVisibility] = useState(false);
     const [isMovingRight, setMovingRight] = useState(false);
     const [isMovingLeft, setMovingLeft] = useState(false);
+    const [refresh, update] = useState(true);
 
     useEffect(() => {
         store.height = window.innerHeight;
@@ -22,14 +23,14 @@ export function App() {
 
     const moveRight = useCallback(() => {
         store.setLayersOffset(offset => offset > -TIME_TO_THE_END_OF_THE_MAP ? offset - OFFSET_STEP: offset);
-        setMovingRight(isMovingRight);
-    }, []);
+        update(!refresh);
+    }, [refresh]);
 
     const moveLeft = useCallback(() => {
         store.setLayersOffset(offset => offset < 0 ? offset + OFFSET_STEP : offset);
-        setMovingLeft(isMovingLeft);
-    }, []);
-
+        update(!refresh);
+    }, [refresh]);
+    
     useEffect(() => {
         if (isMovingRight && isMovingLeft) {
             return;
@@ -40,7 +41,7 @@ export function App() {
         if (isMovingLeft) {
             requestAnimationFrame(moveLeft);
         }
-    }, [isMovingLeft, isMovingRight, store.layersOffset]);
+    }, [isMovingLeft, isMovingRight, moveLeft, moveRight]);
 
     const handleNewGame = useCallback(() => {
         onNewGameAction();

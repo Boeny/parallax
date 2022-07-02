@@ -27,10 +27,10 @@ export const Background = memo(() => {
 
     useEffect(() => {
         store.setLayersOffset = (value) => {
-            store.layersOffset = value;
+            store.layersOffset = layersOffset;
             setLayersOffset(value);
         };
-    }, []);
+    }, [layersOffset]);
 
     return (
         <BackgroundComponent
