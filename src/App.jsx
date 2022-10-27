@@ -72,10 +72,14 @@ export function App() {
                 }
                 break;
             case KEY_CODES.Right:
-                setMovingRight(true);
+                if (!store.menu.isVisible) {
+                    setMovingRight(true);
+                }
                 break;
             case KEY_CODES.Left:
-                setMovingLeft(true);
+                if (!store.menu.isVisible) {
+                    setMovingLeft(true);
+                }
                 break;
             default: break;
         }
